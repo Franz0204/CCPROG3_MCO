@@ -733,7 +733,10 @@ public class SpecialVendingMachine extends RegularVendingMachine {
         }
         return lowest;
     }
-
+    /**
+     * 
+     * @return The menu list
+     */
     public List<Meal> getMenu(){
         return this.menu;
     }
