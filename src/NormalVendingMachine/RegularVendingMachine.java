@@ -36,12 +36,18 @@ public class RegularVendingMachine {
         Sides mozzarellaSticks = new Sides("Mozzarella Sticks", 400);
         Sides salad = new Sides("Fresh Salad", 150);
         Sides soda = new Sides("Soda", 200);
+        Sides chickenTenders = new Sides("Chicken Tenders", 350);
+        Sides garlicBread = new Sides("Garlic Bread", 250);
+        Sides iceCream = new Sides("Ice Cream", 500);
 
         addSlot(frenchFries, 50, true, 10,slots);
         addSlot(onionRings, 70, true, 5,slots);
         addSlot(mozzarellaSticks, 90, true, 8,slots);
         addSlot(salad, 105, true, 10,slots);
         addSlot(soda, 30, true, 5,slots);
+        addSlot(chickenTenders, 140, true, 5,slots);
+        addSlot(garlicBread, 80, true, 7,slots);
+        addSlot(iceCream, 50, true, 4,slots);
     }
 
     /**
@@ -691,5 +697,11 @@ public class RegularVendingMachine {
      */
     public void setName(String name){
         this.name = name;
+    }
+    /**
+     * Resets Input.
+     */
+    public void resetInput() {
+        this.input.clear();
     }
 }
