@@ -51,7 +51,6 @@ public class SpecialVendingMachineController {
      * It should contain the logic for processing transactions in the vending machine.
      */
     private void handleTransactionButtonClick() {
-        // Your code here for transaction logic
     }
 
     /**
@@ -59,7 +58,6 @@ public class SpecialVendingMachineController {
      * It should contain the logic for accessing and managing maintenance options for the vending machine.
      */
     private void handleMaintenanceButtonClick() {
-        // Your code here for maintenance logic
     }
 
     /**

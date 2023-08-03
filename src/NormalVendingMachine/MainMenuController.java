@@ -34,8 +34,6 @@ public class MainMenuController {
     private class TransactionButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            // Code to handle Transaction button click
-            // Replace this with the logic to show the transaction frame
             System.out.println("Transaction button clicked");
             RegularVendingMachine vendingMachine = new RegularVendingMachine("Regular Vending Machine");
             RegularTransactionController controller = new RegularTransactionController(vendingMachine);
@@ -49,8 +47,6 @@ public class MainMenuController {
     public class MaintenanceButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            // Handle the maintenance button action here
-            // Open the MaintenanceOptionView for maintenance options
             MaintenanceOptionView maintenanceOptionView = new MaintenanceOptionView();
             MaintenanceOptionController maintenanceOptionController = new MaintenanceOptionController(model, maintenanceOptionView);
         }

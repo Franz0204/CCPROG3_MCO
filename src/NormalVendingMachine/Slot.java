@@ -1,8 +1,5 @@
 package NormalVendingMachine;
 
-import NormalVendingMachine.Sides;
-import NormalVendingMachine.Client;
-import NormalVendingMachine.Money;
 /**
  * The Slot class represents the space where each side resides in the vending machine.
  * It contains information about the sides itself, the price of each side, when it is available, the slot label, the amount of sides

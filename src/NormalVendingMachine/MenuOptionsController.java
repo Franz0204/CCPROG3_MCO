@@ -5,8 +5,6 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-// import javax.swing.JOptionPane;
-
 /**
  * The MenuOptionsController class is responsible for handling user interactions with the menu options view
  * in the Special Vending Machine.
@@ -59,12 +57,10 @@ public class MenuOptionsController {
     private class AddMoneyButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            // Handle the "Add Money" button action here
-            // Implement your logic here to add money to the current amount
-            int amountToAdd = view.showAddMoneyInputDialog(); // Get the amount to add from the user
+            int amountToAdd = view.showAddMoneyInputDialog(); 
             if (amountToAdd > 0) {
-                model.addMoney(amountToAdd); // Add the entered amount to the model (SpecialVendingMachine)
-                view.setCurrentAmount(model.getCurrentAmount()); // Update the current amount in the view
+                model.addMoney(amountToAdd); 
+                view.setCurrentAmount(model.getCurrentAmount()); 
             } else {
                 view.showErrorMessage("Invalid amount. Please enter a valid amount.");
             }
@@ -114,7 +110,6 @@ public class MenuOptionsController {
     private class CancelTransactionButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            // Handle the "Cancel Transaction" button action here
             SpecialOrderView specialOrderView = new SpecialOrderView();
             SpecialOrderController specialOrderController = new SpecialOrderController();
         }

@@ -22,7 +22,6 @@ public class MaintenanceOptionController {
         this.model = model;
         this.view = view;
 
-        // Adding action listeners for the maintenance options buttons
         this.view.getRestockButton().addActionListener(new RestockButtonListener());
         this.view.getSetSlotPriceButton().addActionListener(new SetSlotPriceButtonListener());
         this.view.getReplenishMoneyButton().addActionListener(new ReplenishMoneyButtonListener());
@@ -40,8 +39,6 @@ public class MaintenanceOptionController {
     private class RestockButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            // Perform actions for restocking
-            // Implement your logic here
         }
     }
 
@@ -53,8 +50,6 @@ public class MaintenanceOptionController {
     private class SetSlotPriceButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            // Perform actions for setting slot price
-            // Implement your logic here
         }
     }
 
@@ -66,8 +61,6 @@ public class MaintenanceOptionController {
     private class ReplenishMoneyButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            // Perform actions for replenishing money
-            // Implement your logic here
         }
     }
 
@@ -79,8 +72,6 @@ public class MaintenanceOptionController {
     private class WithdrawMoneyButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            // Perform actions for withdrawing money
-            // Implement your logic here
         }
     }
 
@@ -92,8 +83,7 @@ public class MaintenanceOptionController {
     private class CheckMoneyButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            // Perform actions for checking money
-            // Implement your logic here
+
         }
     }
 
@@ -105,8 +95,7 @@ public class MaintenanceOptionController {
     private class DisplayItemsButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            // Perform actions for displaying items
-            // Implement your logic here
+
         }
     }
 
@@ -118,10 +107,8 @@ public class MaintenanceOptionController {
     private class ReturnToMainMenuButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            // Close the current MaintenanceOptionsView
 
 
-            // Show the MainMenuView again
             MainMenuView mainMenuView = new MainMenuView();
             MainMenuController mainMenuController = new MainMenuController(model, mainMenuView);
         }

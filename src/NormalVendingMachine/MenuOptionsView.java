@@ -79,18 +79,14 @@ public class MenuOptionsView {
         addMoneyButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Ask the user to input the amount to add
                 String inputAmount = JOptionPane.showInputDialog(frame, "Enter the amount to add (in pesos):",
                         "Add Money", JOptionPane.QUESTION_MESSAGE);
 
                 try {
-                    // Parse the input amount and add it to the current amount
                     int amountToAdd = Integer.parseInt(inputAmount);
                     currentAmount =+ amountToAdd;
-                    // Update the display label to show the current amount
                     displayLabel.setText("Insert Money: " + currentAmount + " pesos");
                 } catch (NumberFormatException ex) {
-                    // Handle invalid input (e.g., non-numeric input)
                     showErrorMessage("Invalid input. Please enter a valid amount.");
                 }
             }
@@ -108,13 +104,10 @@ public class MenuOptionsView {
         makePurchaseButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Get the selected menu item from the combo box
                 String selectedMenuItem = (String) menuItemsComboBox.getSelectedItem();
                 if (selectedMenuItem == null || selectedMenuItem.isEmpty()) {
-                    // If no item is selected, show an error message
                     showErrorMessage("Please select a menu item before making a purchase.");
                 } else {
-                    // Call the listener to handle the "Make Purchase" button action
                     listener.actionPerformed(e);
 
                                 
@@ -178,7 +171,7 @@ public class MenuOptionsView {
         try {
             return Integer.parseInt(inputAmount);
         } catch (NumberFormatException e) {
-            return -1; // Invalid input
+            return -1; 
         }
     }
     public int getCurrentAmount() {
