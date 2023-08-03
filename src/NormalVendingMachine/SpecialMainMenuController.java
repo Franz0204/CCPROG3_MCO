@@ -69,7 +69,7 @@ public class SpecialMainMenuController {
         public void actionPerformed(ActionEvent e) {
             System.out.println("Exiting the program...");
             // TODO: Implement the logic to exit the program or navigate to the vending machine selection view.
-            VendingMachineSelectionController controller = new VendingMachineSelectionController();
+             VendingMachineSelectionController controller = new VendingMachineSelectionController();
         }
     }
 }

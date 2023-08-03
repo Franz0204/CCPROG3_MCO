@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+// import javax.swing.JOptionPane;
+
 /**
  * The MenuOptionsController class is responsible for handling user interactions with the menu options view
  * in the Special Vending Machine.
@@ -20,16 +22,18 @@ public class MenuOptionsController {
      *
      * @param model The SpecialVendingMachine model representing the vending machine.
      * @param view  The MenuOptionsView representing the GUI view for menu options.
-     * @throws IllegalArgumentException if the model is null.
+     * 
      */
     public MenuOptionsController(SpecialVendingMachine model, MenuOptionsView view) {
-        if (model == null) {
-            throw new IllegalArgumentException("Model cannot be null.");
-        }
-
         this.model = model;
         this.view = view;
-
+        
+        // Get the list of meals from the SpecialVendingMachine model
+        List<Meal> meals = model.getMenu();
+        
+        // Pass the list of meals to the MenuOptionsView to add them to the combo box
+        view.addMealsToComboBox(meals);
+        
         // Display the pre-made menu items in the combo box
         updateMenuItemsComboBox();
 
@@ -55,17 +59,17 @@ public class MenuOptionsController {
     private class AddMoneyButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            int amountToAdd = view.showAddMoneyInputDialog();
+            // Handle the "Add Money" button action here
+            // Implement your logic here to add money to the current amount
+            int amountToAdd = view.showAddMoneyInputDialog(); // Get the amount to add from the user
             if (amountToAdd > 0) {
-                model.checkMoney();
-                view.showSuccessMessage("Successfully added " + amountToAdd + " pesos.");
-            } else if (amountToAdd == 0) {
-                view.showErrorMessage("Please enter a valid amount to add.");
+                model.addMoney(amountToAdd); // Add the entered amount to the model (SpecialVendingMachine)
+                view.setCurrentAmount(model.getCurrentAmount()); // Update the current amount in the view
             } else {
-                view.showErrorMessage("Invalid amount. Please enter a positive integer.");
+                view.showErrorMessage("Invalid amount. Please enter a valid amount.");
             }
         }
-    }
+    }   
 
     /**
      * ActionListener for the "Make Purchase" button in the view.
@@ -101,11 +105,19 @@ public class MenuOptionsController {
                 int change = clientBalance - itemPrice;
                 model.dispenseMeal(chosenMeal);
                 model.dispenseChange(change, null);
-                model.printReceipt(chosenMeal.getMenuNo(), 1, change);
+                model.printReceipt(clientBalance, itemPrice, change, null);
                 view.showSuccessMessage("Purchase successful! Enjoy your meal.");
             }
         }
     }
 
-    /**
-     * ActionListener for
+    private class CancelTransactionButtonListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            // Handle the "Cancel Transaction" button action here
+            SpecialOrderView specialOrderView = new SpecialOrderView();
+            SpecialOrderController specialOrderController = new SpecialOrderController();
+        }
+    }
+
+}

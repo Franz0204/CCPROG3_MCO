@@ -4,15 +4,27 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * The VendingMachineSelectionView class represents the view for selecting the type of vending machine.
+ * It displays buttons to choose between a Regular Vending Machine and a Special Vending Machine.
+ */
 public class VendingMachineSelectionView {
     private JFrame frame;
     private JButton regularVendingMachineButton;
     private JButton specialVendingMachineButton;
 
+    /**
+     * Creates a new VendingMachineSelectionView and initializes the user interface elements.
+     * It sets up the JFrame and the Regular Vending Machine and Special Vending Machine buttons.
+     */
     public VendingMachineSelectionView() {
         initialize();
     }
 
+    /**
+     * Initializes the user interface elements of the VendingMachineSelectionView.
+     * It creates the JFrame, sets the title, and configures the layout and buttons.
+     */
     private void initialize() {
         frame = new JFrame();
         frame.setTitle("Select Vending Machine");
@@ -37,12 +49,19 @@ public class VendingMachineSelectionView {
         frame.setVisible(true);
     }
 
+    /**
+     * Sets the action listener for the Regular Vending Machine button.
+     * @param listener The action listener to be set for the Regular Vending Machine button.
+     */
     public void setRegularVendingMachineButtonListener(ActionListener listener) {
         regularVendingMachineButton.addActionListener(listener);
     }
 
+    /**
+     * Sets the action listener for the Special Vending Machine button.
+     * @param listener The action listener to be set for the Special Vending Machine button.
+     */
     public void setSpecialVendingMachineButtonListener(ActionListener listener) {
         specialVendingMachineButton.addActionListener(listener);
     }
-
 }

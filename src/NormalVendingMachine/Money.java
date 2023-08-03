@@ -67,6 +67,6 @@ public class Money {
      * @param quantity the new quantity of this type of currency available
      */
     public void setQuantity(int quantity){
-        this.quantity = quantity;
+        this.quantity += quantity;
     }
 }

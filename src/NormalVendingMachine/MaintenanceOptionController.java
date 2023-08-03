@@ -119,7 +119,7 @@ public class MaintenanceOptionController {
         @Override
         public void actionPerformed(ActionEvent e) {
             // Close the current MaintenanceOptionsView
-            view.closeFrame();
+
 
             // Show the MainMenuView again
             MainMenuView mainMenuView = new MainMenuView();

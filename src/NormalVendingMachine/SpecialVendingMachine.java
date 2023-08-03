@@ -8,7 +8,7 @@ import java.util.Scanner;
  * It extends the RegularVendingMachine class and provides additional functionality for managing pizza ingredients and recipes.
  */
 public class SpecialVendingMachine extends RegularVendingMachine {
-
+    private int currentAmount = 0;
     private List<Slot> ingredients;
     private List<Meal> menu;
 
@@ -19,6 +19,7 @@ public class SpecialVendingMachine extends RegularVendingMachine {
      */
     public SpecialVendingMachine(String name) {
         super(name);
+        this.menu = new ArrayList<>();
         this.ingredients = new ArrayList<>();
         this.menu = new ArrayList<>();
 
@@ -240,8 +241,7 @@ public class SpecialVendingMachine extends RegularVendingMachine {
      * @param quantity the quantity of the purchased item
      * @param change the amount of change given to the client
      */
-    @Override
-    public void printReceipt(int menuNo, int quantity, int change) {
+    public void printReceiptIngredient(int menuNo, int quantity, int change) {
         if (menuNo >= 1 && menuNo <= menu.size()) {
             Meal meal = menu.get(menuNo - 1);
             int total = meal.getTotalPrice() * quantity;
@@ -256,6 +256,21 @@ public class SpecialVendingMachine extends RegularVendingMachine {
             System.out.println("Change: " + change + " pesos");
             System.out.println("--------------------------\n");
         }
+    }
+
+    /**
+     * Retrieves the lowest price among all ingredients in the vending machine.
+     * 
+     * @return the lowest price
+     */
+    public int getLowestIngredientPrice() {
+        int lowest = Integer.MAX_VALUE;
+        for (Slot slot : this.ingredients) {
+            if (slot.getPrice() < lowest) {
+                lowest = slot.getPrice();
+            }
+        }
+        return lowest;
     }
 
     /**
@@ -295,7 +310,9 @@ public class SpecialVendingMachine extends RegularVendingMachine {
                     System.out.println("How would you like to order?");
                     System.out.println("1. Order from the Menu");
                     System.out.println("2. Custom Order");
-                    System.out.println("3. Exit");
+                    System.out.println("3. Buy Sides");
+                    System.out.println("4. Buy Ingredients");
+                    System.out.println("5. Exit");
                     System.out.print("> ");
                     orderC = scanner.nextInt();
                         switch (orderC) {
@@ -356,7 +373,7 @@ public class SpecialVendingMachine extends RegularVendingMachine {
                                     int change = getTotalInput() - itemPrice;
                                     System.out.println("<Dispensing Change>\n");
                                     dispenseChange(change, client);
-                                    printReceipt(choice, 1, change);
+                                    printReceiptIngredient(choice, 1, change);
                                     getInput().clear();
                                     choice = 0;
                                     do {
@@ -382,20 +399,20 @@ public class SpecialVendingMachine extends RegularVendingMachine {
                                         System.out.println("Custom Order:");
                                     
                                         List<Slot> customIngredients = new ArrayList<>();
-                                        int slot;
+                                        int type;
                                     
                                         // Sauce
                                         do {
                                             System.out.println("Choose a sauce:");
                                             displayIngredientsByCategory(1); // Display ingredients in the "Crusts" category
-                                            slot = scanner.nextInt();
+                                            type = scanner.nextInt();
                                     
-                                            if (isValidIngredientChoice(slot, 1)) {
-                                                Slot sauceSlot = ingredients.get(slot - 1);
+                                            if (isValidIngredientChoice(type, 1)) {
+                                                Slot sauceSlot = ingredients.get(type - 1);
                                                 customIngredients.add(sauceSlot);
                                                 break;
                                             } else {
-                                                System.out.println("Invalid crust slot. Please try again.");
+                                                System.out.println("Invalid crust type. Please try again.");
                                             }
                                         } while (true);
 
@@ -403,14 +420,14 @@ public class SpecialVendingMachine extends RegularVendingMachine {
                                         do {
                                             System.out.println("Choose a crust:");
                                             displayIngredientsByCategory(2); // Display ingredients in the "Crusts" category
-                                            slot = scanner.nextInt();
+                                            type = scanner.nextInt();
                                     
-                                            if (isValidIngredientChoice(slot, 2)) {
-                                                Slot crustSlot = ingredients.get(slot - 1);
+                                            if (isValidIngredientChoice(type, 2)) {
+                                                Slot crustSlot = ingredients.get(type - 1);
                                                 customIngredients.add(crustSlot);
                                                 break;
                                             } else {
-                                                System.out.println("Invalid crust slot. Please try again.");
+                                                System.out.println("Invalid crust type. Please try again.");
                                             }
                                         } while (true);
                                     
@@ -418,14 +435,14 @@ public class SpecialVendingMachine extends RegularVendingMachine {
                                         do {
                                             System.out.println("Choose a cheese:");
                                             displayIngredientsByCategory(3); // Display ingredients in the "Cheeses" category
-                                            slot = scanner.nextInt();
+                                            type = scanner.nextInt();
                                     
-                                            if (isValidIngredientChoice(slot, 3)) {
-                                                Slot cheeseSlot = ingredients.get(slot - 1);
+                                            if (isValidIngredientChoice(type, 3)) {
+                                                Slot cheeseSlot = ingredients.get(type - 1);
                                                 customIngredients.add(cheeseSlot);
                                                 break;
                                             } else {
-                                                System.out.println("Invalid cheese slot. Please try again.");
+                                                System.out.println("Invalid cheese type. Please try again.");
                                             }
                                         } while (true);
                                     
@@ -433,14 +450,14 @@ public class SpecialVendingMachine extends RegularVendingMachine {
                                         do {
                                             System.out.println("Choose a meat:");
                                             displayIngredientsByCategory(4); // Display ingredients in the "Meats" category
-                                            slot = scanner.nextInt();
+                                            type = scanner.nextInt();
                                     
-                                            if (isValidIngredientChoice(slot, 4)) {
-                                                Slot meatSlot = ingredients.get(slot - 1);
+                                            if (isValidIngredientChoice(type, 4)) {
+                                                Slot meatSlot = ingredients.get(type - 1);
                                                 customIngredients.add(meatSlot);
                                                 break;
                                             } else {
-                                                System.out.println("Invalid meat slot. Please try again.");
+                                                System.out.println("Invalid meat type. Please try again.");
                                             }
                                         } while (true);
                                     
@@ -448,14 +465,14 @@ public class SpecialVendingMachine extends RegularVendingMachine {
                                         do {
                                             System.out.println("Choose a fruit:");
                                             displayIngredientsByCategory(5); // Display ingredients in the "Fruits" category
-                                            slot = scanner.nextInt();
+                                            type = scanner.nextInt();
                                     
-                                            if (isValidIngredientChoice(slot, 5)) {
-                                                Slot fruitSlot = ingredients.get(slot - 1);
+                                            if (isValidIngredientChoice(type, 5)) {
+                                                Slot fruitSlot = ingredients.get(type - 1);
                                                 customIngredients.add(fruitSlot);
                                                 break;
                                             } else {
-                                                System.out.println("Invalid fruit slot. Please try again.");
+                                                System.out.println("Invalid fruit type. Please try again.");
                                             }
                                         } while (true);
                                     
@@ -463,14 +480,14 @@ public class SpecialVendingMachine extends RegularVendingMachine {
                                         do {
                                             System.out.println("Choose a vegetable:");
                                             displayIngredientsByCategory(6); // Display ingredients in the "Vegetables" category
-                                            slot = scanner.nextInt();
+                                            type = scanner.nextInt();
                                     
-                                            if (isValidIngredientChoice(slot, 6)) {
-                                                Slot vegetableSlot = ingredients.get(slot - 1);
+                                            if (isValidIngredientChoice(type, 6)) {
+                                                Slot vegetableSlot = ingredients.get(type - 1);
                                                 customIngredients.add(vegetableSlot);
                                                 break;
                                             } else {
-                                                System.out.println("Invalid vegetable slot. Please try again.");
+                                                System.out.println("Invalid vegetable type. Please try again.");
                                             }
                                         } while (true);
                             
@@ -527,7 +544,7 @@ public class SpecialVendingMachine extends RegularVendingMachine {
                                     int change = getTotalInput() - itemPrice;
                                     System.out.println("<Dispensing Change>\n");
                                     dispenseChange(change, client);
-                                    printReceipt(menu.size() - 1, 1, change);
+                                    printReceiptIngredient(menu.size() - 1, 1, change);
                                     getInput().clear();
                                     menu.remove(menu.size() - 1);
                                     do {
@@ -541,10 +558,175 @@ public class SpecialVendingMachine extends RegularVendingMachine {
                                 } while (sentinel2 == 0);
                             
                             case 3:
+                                System.out.println("Hello Fellow Customer, Welcome To The " + getName());
+                                System.out.println("Here we serve various side dishes for <Pizza>");
+                                System.out.println("---------------------------------------------------------------");
+                                displayItems();
+                                System.out.println("---------------------------------------------------------------");
+
+                                int sentinel3 = 0;
+                                List<Money> copy = null;
+
+                                do {
+                                    do {
+                                        do {
+                                            // Asks for cash
+                                            System.out.print("Please Insert Cash To Proceed (Enter -1 when done, Enter 0 to cancel transaction): ");
+                                            choice = scanner.nextInt();
+
+                                            if (choice == -1) {
+                                                // Stop adding money and proceed to choose a slot
+                                                break;
+                                            } else if (choice == 0) {
+                                                // Cancel the transaction
+                                                cancelPurchase(client);
+                                                System.out.println("Transaction Cancelled");
+                                                scanner.close();
+                                                return;
+                                            } else {
+                                                receiveUserMoney(client, choice);
+                                                System.out.format("Total Input: %d pesos%n", getTotalInput());
+                                            }
+                                        } while (true);
+
+                                        if (getTotalInput() < getLowestSlotPrice()) {
+                                            System.out.println("No items to afford. Please add more money or cancel the transaction.");
+                                        } else {
+                                            break;
+                                        }
+                                    } while (true);
+
+                                    copy = getInput();
+                                    Slot s = null;
+
+                                    do {
+                                        // Asks for a slot
+                                        System.out.println("Choose a slot:");
+                                        choice = scanner.nextInt();
+                                        Slot chosenSlot = chooseSlot(choice, getSlots());
+                                        if (chosenSlot != null) {
+                                            s = chosenSlot;
+                                            break;
+                                        } else {
+                                            System.out.println("Invalid Slot");
+                                        }
+                                    } while (true);
+
+                                    int itemPrice = s.getPrice();
+
+                                    if (getTotalInput() < itemPrice) {
+                                        System.out.println("Insufficient change in the vending machine. Transaction cancelled.");
+                                        cancelPurchase(client);
+                                        scanner.close();
+                                        return;
+                                    }
+
+                                    System.out.println("<Dispensing Product>\n");
+                                    dispenseProduct(s);
+                                    System.out.println("Received " + s.getSides().getName() + "\n");
+
+                                    int change = getTotalInput() - itemPrice;
+                                    System.out.println("<Dispensing Change>\n");
+                                    dispenseChange(change, client);
+                                    printReceipt(choice, 1, change, getSlots());
+                                    getInput().clear(); //removes current input, since change has been given
+                                    choice = 0;
+                                    do {
+                                        System.out.println("Do you wish to make another purchase? type 1 - yes | 0 - no");
+                                        choice = scanner.nextInt();
+                                        if (choice == 0) sentinel3 = 1;
+                                    } while ((choice != 1) && (choice != 0));
+                                } while (sentinel3 == 0);
+                                        break;
+
+                            case 4:
+                                System.out.println("Hello Fellow Customer, Welcome To The " + getName());
+                                System.out.println("Here we serve various ingredients for <Pizza>");
+                                System.out.println("---------------------------------------------------------------");
+                                displayIngredients();
+                                System.out.println("---------------------------------------------------------------");
+
+                                int sentinel4 = 0;
+                                List<Money> copy1 = null;
+
+                                do {
+                                    do {
+                                        do {
+                                            // Asks for cash
+                                            System.out.print("Please Insert Cash To Proceed (Enter -1 when done, Enter 0 to cancel transaction): ");
+                                            choice = scanner.nextInt();
+
+                                            if (choice == -1) {
+                                                // Stop adding money and proceed to choose a slot
+                                                break;
+                                            } else if (choice == 0) {
+                                                // Cancel the transaction
+                                                cancelPurchase(client);
+                                                System.out.println("Transaction Cancelled");
+                                                scanner.close();
+                                                return;
+                                            } else {
+                                                receiveUserMoney(client, choice);
+                                                System.out.format("Total Input: %d pesos%n", getTotalInput());
+                                            }
+                                        } while (true);
+
+                                        if (getTotalInput() < getLowestIngredientPrice()) {
+                                            System.out.println("No items to afford. Please add more money or cancel the transaction.");
+                                        } else {
+                                            break;
+                                        }
+                                    } while (true);
+
+                                    copy = getInput();
+                                    Slot s = null;
+
+                                    do {
+                                        // Asks for a slot
+                                        System.out.println("Choose a slot:");
+                                        choice = scanner.nextInt();
+                                        Slot chosenSlot = chooseSlot(choice, ingredients);
+                                        if (chosenSlot != null) {
+                                            s = chosenSlot;
+                                            break;
+                                        } else {
+                                            System.out.println("Invalid Slot");
+                                        }
+                                    } while (true);
+
+                                    int itemPrice = s.getPrice();
+
+                                    if (getTotalInput() < itemPrice) {
+                                        System.out.println("Insufficient change in the vending machine. Transaction cancelled.");
+                                        cancelPurchase(client);
+                                        scanner.close();
+                                        return;
+                                    }
+
+                                    System.out.println("<Dispensing Product>\n");
+                                    dispenseProduct(s);
+                                    System.out.println("Received " + s.getSides().getName() + "\n");
+
+                                    int change = getTotalInput() - itemPrice;
+                                    System.out.println("<Dispensing Change>\n");
+                                    dispenseChange(change, client);
+                                    printReceipt(choice, 1, change, ingredients);
+                                    getInput().clear(); //removes current input, since change has been given
+                                    choice = 0;
+                                    do {
+                                        System.out.println("Do you wish to make another purchase? type 1 - yes | 0 - no");
+                                        choice = scanner.nextInt();
+                                        if (choice == 0) sentinel4 = 1;
+                                    } while ((choice != 1) && (choice != 0));
+                                } while (sentinel4 == 0);
+                                        
+                                break;
+
+                            case 5:
                                 System.out.println("Exiting the transaction...");
                                 break;
-                        }
-                    break;
+                                }
+                        break;
 
                 case 2:                   
                     int maintenanceChoice;
@@ -741,5 +923,22 @@ public class SpecialVendingMachine extends RegularVendingMachine {
         return this.menu;
     }
 
-}
+    /**
+     * Adds money to the current amount.
+     *
+     * @param amount The amount to be added.
+     */
+    public void addMoney(int amount) {
+        currentAmount += amount;
+    }
 
+    /**
+     * Gets the current amount of money inserted.
+     *
+     * @return The current amount of money.
+     */
+    public int getCurrentAmount() {
+        return currentAmount;
+    }
+
+}

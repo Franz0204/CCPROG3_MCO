@@ -211,10 +211,10 @@ public class RegularVendingMachine {
      * @param slotNo the slot number of the chosen slot
      * @return the chosen Slot object, or null if no suitable slot is found
      */
-    public Slot chooseSlot(int slotNo) {
+    public Slot chooseSlot(int slotNo, List<Slot> slots) {
         int clientBalance = getTotalInput();
 
-        for (Slot slot : this.slots) {
+        for (Slot slot : slots) {
             if (slot.getSlotNo() == slotNo && slot.getPrice() <= clientBalance) {
                 return slot;
             }
@@ -303,7 +303,7 @@ public class RegularVendingMachine {
      * @param quantity the quantity of the purchased item
      * @param change the amount of change given to the client
      */
-    public void printReceipt(int slotNo, int quantity, int change) {
+    public void printReceipt(int slotNo, int quantity, int change, List<Slot> slots) {
         if (slotNo >= 1 && slotNo <= slots.size()) {
             Slot slot = slots.get(slotNo - 1);
             int total = slot.getPrice() * quantity;
@@ -527,7 +527,7 @@ public class RegularVendingMachine {
                             // Asks for a slot
                             System.out.println("Choose a slot:");
                             choice = scanner.nextInt();
-                            Slot chosenSlot = chooseSlot(choice);
+                            Slot chosenSlot = chooseSlot(choice,slots);
                             if (chosenSlot != null) {
                                 s = chosenSlot;
                                 break;
@@ -552,7 +552,7 @@ public class RegularVendingMachine {
                         int change = getTotalInput() - itemPrice;
                         System.out.println("<Dispensing Change>\n");
                         dispenseChange(change, client);
-                        printReceipt(choice, 1, change);
+                        printReceipt(choice, 1, change, slots);
                         this.input.clear(); //removes current input, since change has been given
                         choice = 0;
                         do {

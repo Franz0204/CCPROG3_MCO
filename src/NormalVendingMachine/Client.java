@@ -14,6 +14,8 @@ public class Client {
       * Constructs a new instance of the Client class with the specified name and his wallet 
       *
       * @param name The name of the user.
+      * @param calories The user's wallet where he stores his money.
+      * @param denominations The list of the kinds of money the user can interact with.
       */
     public Client(String name) {
         this.name = name;
@@ -29,6 +31,7 @@ public class Client {
     /**
       * Constructs a new instance of the Client class where the user can view the amount of money in their wallet 
       *
+      * @param total The total sum of money in the users wallet
       */
     public int checkWallet() {
         int total = 0;

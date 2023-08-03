@@ -1,4 +1,8 @@
 package NormalVendingMachine;
+
+import NormalVendingMachine.Sides;
+import NormalVendingMachine.Client;
+import NormalVendingMachine.Money;
 /**
  * The Slot class represents the space where each side resides in the vending machine.
  * It contains information about the sides itself, the price of each side, when it is available, the slot label, the amount of sides
@@ -50,7 +54,7 @@ public class Slot {
 
     /**
      * Restocks the slot with the specified quantity of sides.
-     * The supply is incremented by the quantity, up to a maxiumum of 10.
+     * The supply is incremented by the quantity, up to a maximum of 10.
      * 
      * @param quantity the quantity of sides to be restocked
      * @return true if the restock is successful, false otherwise
@@ -58,7 +62,7 @@ public class Slot {
     public boolean restock(int quantity){
         // add a condition to check that it doesnt exceed more than 10 supply
         int refill  = this.supply + quantity;
-        if (refill > 10){           
+        if (refill <= 10){           
             this.supply = refill;
             return true;
         }

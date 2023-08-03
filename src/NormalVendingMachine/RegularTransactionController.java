@@ -44,7 +44,7 @@ public class RegularTransactionController {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     // Perform actions for the selected slot
-                    Slot slot = vendingMachine.chooseSlot(slotNumber);
+                    Slot slot = vendingMachine.chooseSlot(slotNumber, slots);
                     if (slot != null) {
                         int price = slot.getPrice();
 
