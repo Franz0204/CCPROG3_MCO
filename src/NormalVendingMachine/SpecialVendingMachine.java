@@ -406,7 +406,7 @@ public class SpecialVendingMachine extends RegularVendingMachine {
                                             System.out.println("Choose a sauce:");
                                             displayIngredientsByCategory(1); // Display ingredients in the "Crusts" category
                                             type = scanner.nextInt();
-                                    
+                                            if (type == 0) break;
                                             if (isValidIngredientChoice(type, 1)) {
                                                 Slot sauceSlot = ingredients.get(type - 1);
                                                 customIngredients.add(sauceSlot);
@@ -421,7 +421,7 @@ public class SpecialVendingMachine extends RegularVendingMachine {
                                             System.out.println("Choose a crust:");
                                             displayIngredientsByCategory(2); // Display ingredients in the "Crusts" category
                                             type = scanner.nextInt();
-                                    
+                                            if (type == 0) break;
                                             if (isValidIngredientChoice(type, 2)) {
                                                 Slot crustSlot = ingredients.get(type - 1);
                                                 customIngredients.add(crustSlot);
@@ -436,7 +436,7 @@ public class SpecialVendingMachine extends RegularVendingMachine {
                                             System.out.println("Choose a cheese:");
                                             displayIngredientsByCategory(3); // Display ingredients in the "Cheeses" category
                                             type = scanner.nextInt();
-                                    
+                                            if (type == 0) break;
                                             if (isValidIngredientChoice(type, 3)) {
                                                 Slot cheeseSlot = ingredients.get(type - 1);
                                                 customIngredients.add(cheeseSlot);
@@ -451,7 +451,7 @@ public class SpecialVendingMachine extends RegularVendingMachine {
                                             System.out.println("Choose a meat:");
                                             displayIngredientsByCategory(4); // Display ingredients in the "Meats" category
                                             type = scanner.nextInt();
-                                    
+                                            if (type == 0) break;
                                             if (isValidIngredientChoice(type, 4)) {
                                                 Slot meatSlot = ingredients.get(type - 1);
                                                 customIngredients.add(meatSlot);
@@ -466,7 +466,7 @@ public class SpecialVendingMachine extends RegularVendingMachine {
                                             System.out.println("Choose a fruit:");
                                             displayIngredientsByCategory(5); // Display ingredients in the "Fruits" category
                                             type = scanner.nextInt();
-                                    
+                                            if (type == 0) break;
                                             if (isValidIngredientChoice(type, 5)) {
                                                 Slot fruitSlot = ingredients.get(type - 1);
                                                 customIngredients.add(fruitSlot);
@@ -481,7 +481,7 @@ public class SpecialVendingMachine extends RegularVendingMachine {
                                             System.out.println("Choose a vegetable:");
                                             displayIngredientsByCategory(6); // Display ingredients in the "Vegetables" category
                                             type = scanner.nextInt();
-                                    
+                                            if (type == 0) break;
                                             if (isValidIngredientChoice(type, 6)) {
                                                 Slot vegetableSlot = ingredients.get(type - 1);
                                                 customIngredients.add(vegetableSlot);
@@ -848,6 +848,7 @@ public class SpecialVendingMachine extends RegularVendingMachine {
                         slot.getSlotNo(), slot.getSides().getName(), slot.getPrice(), slot.getSides().getCalories(), slot.getSupply());
             }
         }
+        System.out.println("|Skip: Type 0");
     }
 
     /**

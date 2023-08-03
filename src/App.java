@@ -31,6 +31,7 @@ public class App {
                     scanner.close();
                     break;
                 default:
+                    scanner.close();
                     break;
             }
         } while (sentinel == 0);
